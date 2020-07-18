@@ -37,7 +37,7 @@ class App < Sinatra::Base
     end
 
     def image_path(file_name)
-      "#{public_folder}/image/#{file_name}"
+      "#{public_folder}/icons/#{file_name}"
     end
   end
 
@@ -326,17 +326,18 @@ class App < Sinatra::Base
     redirect '/', 303
   end
 
-  get '/icons/:file_name' do
-    file_name = params[:file_name]
-    data = File.exist?(image_path(file_name)) ? File.read(image_path(file_name)) : nil
-    ext = file_name.include?('.') ? File.extname(file_name) : ''
-    mime = ext2mime(ext)
-    if !data.nil? && !mime.empty?
-      content_type mime
-      return data
-    end
-    404
-  end
+  # 静的配信に切り替えた
+  # get '/icons/:file_name' do
+  #   file_name = params[:file_name]
+  #   data = File.exist?(image_path(file_name)) ? File.read(image_path(file_name)) : nil
+  #   ext = file_name.include?('.') ? File.extname(file_name) : ''
+  #   mime = ext2mime(ext)
+  #   if !data.nil? && !mime.empty?
+  #     content_type mime
+  #     return data
+  #   end
+  #   404
+  # end
 
   private
 
